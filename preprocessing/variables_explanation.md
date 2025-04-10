@@ -5,7 +5,6 @@
 | MONTH                 | 航班月份（1–12）                   | Month of the flight (1–12)             |
 | DAY                   | 航班当月中的日期（1–31）           | Day of the month                        |
 | WEEK                  | 星期几（Mon–Sun）                  | Day of the week                         |
-| DATE                  | 航班的完整日期（YYYY-MM-DD）        | Flight date                             |
 | MKT_AIRLINE           | 航空公司营销承运人代码              | Marketing carrier code                  |
 | MKT_FL_NUM            | 航班号（营销航司使用的编号）        | Marketing flight number                 |
 | ORIGIN_AIRPORT_ID     | 起飞机场内部编号（非IATA代码）      | Unique ID for origin airport            |
@@ -29,6 +28,7 @@
 | SCH_ARR_TIME          | 计划到达时间（本地时间）            | Scheduled arrival time (local)          |
 | ACT_ARR_TIME          | 实际到达时间（本地时间）            | Actual arrival time (local)             |
 | ARR_DELAY             | 到达延误时间（分钟）                | Arrival delay in minutes                |
+| ARR_DELAY_NEW         | 正向到达延误（分钟，若无延误则为0）  | Positive arrival delay only             |
 | CANCELLED             | 是否取消（1=取消, 0=未取消）        | Flight cancelled (1=yes, 0=no)          |
 | CANCELLATION_CODE     | 取消原因（如 Carrier, Weather）     | Reason for cancellation                 |
 | SCH_DURATION          | 计划飞行时长（分钟）                | Scheduled elapsed flight time           |
