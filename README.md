@@ -40,6 +40,4 @@ python Weather Codes/station/merge_station_id.py
 # Download weather data (2021-2024 May-Aug)
 python Weather Codes/weather_downloader2.py
 ```
-
-[View Full Documentation](preprocessing/variables_explanation.md) | [Project Report](stat628_sp25_airline.pdf)
-```
+[Project requirements](stat628_sp25_airline.pdf)
