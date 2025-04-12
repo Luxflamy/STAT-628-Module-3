@@ -39,11 +39,11 @@ python Weather Codes/station/merge_station_id.py
 python Weather Codes/weather_downloader2.py
 ```
 
-[Airport Variables Explanation (Chinese and English)](preprocessing/variables_explanation.md)
-[Weather Variables Explanation (Chinese and English)](Weather%20Codes/variables_exp.md)
+[Airport Variables Explanation (Chinese and English)](preprocessing/variables_explanation.md)|[Weather Variables Explanation (Chinese and English)](Weather%20Codes/variables_exp.md)
 
 
 
 3. Data Processing
 ```bash
+
 
