@@ -24,26 +24,7 @@ python weather_downloader2.py
 ```
 Outputs: Airport-specific CSV files (e.g., `ORD_2021_May_1.csv`)
 
-## 🚀 Quick Start
-1. Install requirements:
-```bash
-pip install pandas requests tqdm fuzzywuzzy python-Levenshtein
-```
-
-2. Run processing pipeline:
-```bash
-# Match stations to airports
-python Weather Codes/station/merge_station_id.py
-
-# Download weather data (2021-2024 May-Aug)
-python Weather Codes/weather_downloader2.py
-```
-
 [Airport Variables Explanation (Chinese and English)](preprocessing/variables_explanation.md) | [Weather Variables Explanation (Chinese and English)](Weather%20Codes/variables_exp.md)
 
-
-
-3. Data Processing
-```bash
 
 
