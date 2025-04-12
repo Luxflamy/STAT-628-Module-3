@@ -1,9 +1,7 @@
 # Airline Performance Analysis with Weather Impact Evaluation(STAT-628-Module-3)
 
 Airline performance analysis with weather impact evaluation
-
-[Variables Explanation (Chinese and English)](preprocessing/variables_explanation.md)
-
+[Project requirements](stat628_sp25_airline.pdf)
 
 ## 🌦️ Meteorological Data Processing
 
@@ -40,4 +38,8 @@ python Weather Codes/station/merge_station_id.py
 # Download weather data (2021-2024 May-Aug)
 python Weather Codes/weather_downloader2.py
 ```
-[Project requirements](stat628_sp25_airline.pdf)
+
+[Airport Variables Explanation (Chinese and English)](preprocessing/variables_explanation.md)
+
+[Weather Variables Explanation (Chinese and English)](Weather Codes/variables_exp.md)
+
