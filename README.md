@@ -36,12 +36,20 @@ Outputs: Airport-specific CSV files (e.g., `ORD_2021_May_1.csv`)
 [Airport Variables Explanation (Chinese and English)](preprocessing/variables_explanation.md) | [Weather Variables Explanation (Chinese and English)](Weather%20Codes/variables_exp.md)
 
 ## Models
-### 2.1 Data Scope
+### How to use codes of models?
+You can download all the codes [here](https://uwmadison.box.com/s/8hgghrqof6y21czfodk5ob7zm1v2p5m9). In order to run them correctly, you need to unzip `weather_data.zip`, `cleaned_data.zip`, and `cleaned_weather_data.zip` under the same directory.
+Some ralated version requirements are listed below.
 
-### 2.2 Cancellation Prediction
-
-### 2.3 Departure Delay Prediction
-
-### 2.4 Arrival Delay Prediction
-
+| Package     | Version  |
+|-------------|----------|
+| IPython     | 8.22.1   |
+| joblib      | 1.2.0    |
+| matplotlib  | 3.8.0    |
+| numpy       | 1.24.3   |
+| pandas      | 2.2.1    |
+| scipy       | 1.12.0   |
+| seaborn     | 0.13.2   |
+| sklearn     | 1.3.0    |
+| torch       | 2.2.2    |
+| tqdm        | 4.65.0   |
 
