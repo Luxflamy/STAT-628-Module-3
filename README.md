@@ -29,11 +29,3 @@ python weather_downloader2.py
 Outputs: Airport-specific CSV files (e.g., `ORD_2021_May_1.csv`)
 
 [Airport Variables Explanation (Chinese and English)](preprocessing/variables_explanation.md) | [Weather Variables Explanation (Chinese and English)](Weather%20Codes/variables_exp.md)
-
->>>>>>> 4f47b349fe7d11fb3f7837fc762a3898289ce313
->>>>>>>
->>>>>>
->>>>>
->>>>
->>>
->>
