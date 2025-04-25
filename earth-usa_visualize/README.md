@@ -46,6 +46,8 @@ To run this project locally:
 
 ## Installation & Local Preview
 
+> Software dependencies: python, gitbash, nodejs
+
 1. **Clone the repo**  
 
    ```bash
