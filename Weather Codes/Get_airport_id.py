@@ -2,24 +2,24 @@ import os
 import pandas as pd
 
 def get_unique_airport_info():
-    # 获取 cleaned_data 文件夹中的所有 CSV 文件
+    # Get all CSV files in the cleaned_data folder
     data_dir = "cleaned_data"
     csv_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
     
-    # 初始化一个字典来存储机场信息，键为机场ID，值为包含州、城市和IATA代码的字典
+    # Initialize a dictionary to store airport information
     airport_info = {}
     
-    # 遍历每个CSV文件
+    # Iterate through each CSV file
     for file in csv_files:
         file_path = os.path.join(data_dir, file)
         try:
-            # 读取CSV文件，加载需要的列
+            # Read the CSV file and load required columns
             df = pd.read_csv(file_path, usecols=[
                 'ORIGIN_AIRPORT_ID', 'ORIGIN_CITY', 'ORIGIN_IATA',
                 'DEST_AIRPORT_ID', 'DEST_CITY', 'DEST_IATA'
             ])
             
-            # 处理起始机场信息
+            # Process origin and destination airport information
             for _, row in df.iterrows():
                 origin_id = row['ORIGIN_AIRPORT_ID']
                 if origin_id not in airport_info:
@@ -53,7 +53,7 @@ def get_unique_airport_info():
         except Exception as e:
             print(f"Error processing {file}: {str(e)}")
     
-    # 将字典转换为DataFrame
+    # Convert the dictionary to a DataFrame
     result_data = []
     for airport_id, info in airport_info.items():
         result_data.append([
@@ -63,11 +63,11 @@ def get_unique_airport_info():
             info['iata']
         ])
     
-    # 按机场ID排序
+    # Sort by airport ID
     result_df = pd.DataFrame(result_data, columns=['AIRPORT_ID', 'STATE', 'CITY', 'IATA_CODE'])
     result_df = result_df.sort_values('AIRPORT_ID').reset_index(drop=True)
     
-    # 将结果保存到CSV文件
+    # Save the results to a CSV file
     result_df.to_csv('airport_id.csv', index=False)
     
     print(f"Total unique airports found: {len(result_df)}")

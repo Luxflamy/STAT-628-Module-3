@@ -3,11 +3,11 @@ import requests
 from datetime import datetime
 import os
 import time
-from tqdm import tqdm  # 用于显示进度条
+from tqdm import tqdm  # show progress bar
 
 def fetch_weather_data(station_id, start_date, end_date, data_types, units="metric"):
     """
-    从NCEI API获取气象数据
+    Get weather data from NCEI API
     """
     base_url = "https://www.ncei.noaa.gov/access/services/data/v1"
     
@@ -38,41 +38,39 @@ def fetch_weather_data(station_id, start_date, end_date, data_types, units="metr
             
         return df
     except Exception as e:
-        print(f"\n获取数据失败(站点{station_id}): {e}")
+        print(f"\nFailed to get data (site{station_id}): {e}")
         return None
 
 def standardize_columns(df):
     """
-    规范数据列顺序和格式
+    Standardize data column order and format
     """
-    # 定义固定顺序的列名（优先显示的列）
+    # define the priority columns
     priority_columns = [
         'STATION', 'NAME', 'DATE', 'LATITUDE', 'LONGITUDE', 'ELEVATION'
     ]
     
-    # 获取实际存在的优先列
+    # get existing priority columns
     existing_priority = [col for col in priority_columns if col in df.columns]
     
-    # 获取其他列（气象数据列）
+    # other columns
     other_columns = [col for col in df.columns if col not in existing_priority]
     
-    # 按类型对气象数据列排序（温度、降水、风速等）
+    # ranking other columns
     sorted_other_columns = sorted(other_columns, key=lambda x: (
-        0 if x.startswith('T') else  # 温度相关
-        1 if x.startswith('PRCP') or x.startswith('SNOW') else  # 降水
-        2 if x.startswith('AWND') or x.startswith('WSF') or x.startswith('GUST') else  # 风速
-        3 if x.startswith('RH') or x.startswith('VIS') else  # 湿度和能见度
-        4 if x.startswith('WT') else  # 天气现象
-        5  # 其他
+        0 if x.startswith('T') else  # temperature
+        1 if x.startswith('PRCP') or x.startswith('SNOW') else  # precipitation
+        2 if x.startswith('AWND') or x.startswith('WSF') or x.startswith('GUST') else  # wind speed
+        3 if x.startswith('RH') or x.startswith('VIS') else  # humidity and visibility
+        4 if x.startswith('WT') else  # weather phenomena
+        5  # others
     ))
     
-    # 合并列顺序
+    # combine the columns
     final_columns = existing_priority + sorted_other_columns
-    
-    # 应用新列顺序
     df = df[final_columns]
     
-    # 统一日期格式
+    # standardize date format
     if 'DATE' in df.columns:
         df['DATE'] = pd.to_datetime(df['DATE']).dt.strftime('%Y-%m-%d')
     
@@ -80,24 +78,24 @@ def standardize_columns(df):
 
 def save_monthly_data(df, iata_code, year, month, output_dir="weather_data"):
     """
-    将月度数据保存为CSV文件，按照指定命名规则
+    Save monthly data as a CSV file according to the specified naming convention
     """
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     
-    # 过滤出当月数据
+    # filter out the monthly data
     df['DATE'] = pd.to_datetime(df['DATE'])
     monthly_df = df[(df['DATE'].dt.year == year) & (df['DATE'].dt.month == month)]
     
     if monthly_df.empty:
         return False
     
-    # 生成文件名
-    month_name = datetime(year, month, 1).strftime('%b')  # 获取月份英文缩写
+    # generate filename
+    month_name = datetime(year, month, 1).strftime('%b')  # get the month's abbreviation
     filename = f"{iata_code}_{year}_{month_name}_1.csv"
     filepath = os.path.join(output_dir, filename)
     
-    # 处理同机场多个站点的情况
+    # multiple files check
     counter = 1
     while os.path.exists(filepath):
         counter += 1
@@ -108,33 +106,29 @@ def save_monthly_data(df, iata_code, year, month, output_dir="weather_data"):
     return True
 
 def main():
-    # 读取站点信息
+
     station_df = pd.read_csv('station/final_station_id.csv')
-    
-    # 只保留有IATA代码的站点
     station_df = station_df.dropna(subset=['IATA_CODE'])
-    
-    # 选择气象变量
+
     data_types = [
-        "TMAX", "TMIN", "TAVG",    # 温度
-        "PRCP", "SNOW",             # 降水
-        "AWND", "WSF2", "WSF5",     # 风速
-        "RH", "VIS",                # 湿度和能见度
-        "WT01", "WT03"              # 天气现象(雾,雷雨)
+        "TMAX", "TMIN", "TAVG",    # Temperature
+        "PRCP", "SNOW",             # precipitation
+        "AWND", "WSF2", "WSF5",     # wind speed
+        "RH", "VIS",                # humidity and visibility
+        "WT01", "WT03"              # weather phenomena (fog, thunderstorms)
     ]
     
-    # 设置日期范围
-    years = range(2021, 2025)  # 2021-2024年
-    months = [5, 6, 7, 8]      # 5-8月
+    years = range(2021, 2025)  # 2021-2024
+    months = [5, 6, 7, 8]      # 5-8 months
     
-    print(f"\n开始获取气象数据(2021-2024年5-8月)...")
+    print(f"\n Started acquiring weather data(2021-2024/5-8 months)...")
     
-    # 遍历每个站点
-    for _, row in tqdm(station_df.iterrows(), total=len(station_df), desc="处理站点"):
+    # Iterate through each station
+    for _, row in tqdm(station_df.iterrows(), total=len(station_df), desc="Processing stations"):
         station_id = row['station_id']
         iata_code = row['IATA_CODE']
         
-        # 获取该站点的完整数据
+        # Get the complete data for the station
         full_df = fetch_weather_data(
             station_id=station_id,
             start_date="2021-01-01",
@@ -145,17 +139,17 @@ def main():
         if full_df is None or full_df.empty:
             continue
         
-        # 保存每月数据
+        # Save monthly data
         for year in years:
             for month in months:
                 saved = save_monthly_data(full_df, iata_code, year, month)
                 if not saved:
-                    print(f"\n警告: {iata_code} {year}-{month} 无数据")
+                    print(f"\nWarning: {iata_code} {year}-{month} no data")
         
-        # 避免API请求过于频繁
+        # Avoid excessive API requests
         time.sleep(1)
     
-    print("\n所有数据处理完成!")
+    print("\nAll data processing completed!")
 
 if __name__ == "__main__":
     main()
