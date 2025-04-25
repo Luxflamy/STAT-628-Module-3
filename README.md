@@ -54,6 +54,7 @@ Some ralated version requirements are listed below.
 | tqdm        | 4.65.0   |
 
 Here is an ideal structure of model files.
+```
 |
 ├─arr_delay_rf_models
 │  ├─comparison
@@ -99,5 +100,4 @@ Here is an ideal structure of model files.
 │  └─year_2024
 ├─plots
 └─weather_data
-
-
+```
