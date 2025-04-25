@@ -49,8 +49,8 @@ To run this project locally:
 1. **Clone the repo**  
 
    ```bash
-   git clone https://github.com/Luxflamy/earth-usa.git
-   cd earth-usa
+   git clone https://github.com/Luxflamy/STAT-628-Module-3.git
+   cd STAT-628-Module-3/earth-usa_visualize
    ```
 
 2. **Install front-end dependencies**  
@@ -75,6 +75,7 @@ To run this project locally:
    open another bash terminal and run
 
    ```bash
+   cd STAT-628-Module-3/earth-usa_visualize
    npx serve .
    ```  
 
