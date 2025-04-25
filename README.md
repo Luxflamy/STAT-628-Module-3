@@ -37,7 +37,7 @@ Outputs: Airport-specific CSV files (e.g., `ORD_2021_May_1.csv`)
 
 ## Models
 ### How to use codes of models?
-You can download all the codes [here](https://uwmadison.box.com/s/8hgghrqof6y21czfodk5ob7zm1v2p5m9). In order to run them correctly, you need to unzip `weather_data.zip`, `cleaned_data.zip`, and `cleaned_weather_data.zip` under the same directory.
+The folder `Models` does NOT contain any data files, and you can download all the codes [here](https://uwmadison.box.com/s/8hgghrqof6y21czfodk5ob7zm1v2p5m9). In order to run them correctly, you need to unzip `weather_data.zip`, `cleaned_data.zip`, and `cleaned_weather_data.zip` under the same directory of model files.
 Some ralated version requirements are listed below.
 
 | Package     | Version  |
@@ -52,4 +52,52 @@ Some ralated version requirements are listed below.
 | sklearn     | 1.3.0    |
 | torch       | 2.2.2    |
 | tqdm        | 4.65.0   |
+
+Here is an ideal structure of model files.
+|
+├─arr_delay_rf_models
+│  ├─comparison
+│  ├─year_2021
+│  │  ├─metrics
+│  │  └─plots
+│  ├─year_2022
+│  ├─year_2023
+│  └─year_2024
+├─cancelled_prob_lr_models
+│  ├─metrics
+│  └─plots
+├─cancelled_prob_rf_models
+│  ├─metrics
+│  └─plots
+├─cleaned_data
+├─cleaned_weather_data
+├─dep_delay_lr
+│  ├─comparison
+│  ├─year_2021
+│  │  ├─metrics
+│  │  └─plots
+│  ├─year_2022
+│  ├─year_2023
+│  └─year_2024
+├─dep_delay_nn
+│  ├─comparison
+│  ├─comparison_rnn_attention
+│  ├─year_2021
+│  │  ├─metrics_2021
+│  │  ├─models_2021
+│  │  └─plots_2021
+│  ├─year_2022
+│  ├─year_2023
+│  └─year_2024
+├─dep_delay_rf
+│  ├─comparison
+│  ├─year_2021
+│  │  ├─metrics
+│  │  └─plots
+│  ├─year_2022
+│  ├─year_2023
+│  └─year_2024
+├─plots
+└─weather_data
+
 
